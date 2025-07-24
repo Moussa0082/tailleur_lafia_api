@@ -1,6 +1,6 @@
 
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=monapp;charset=utf8", "root", "");
+require_once 'db.php'; // <-- inclut la connexion
 
 $data = json_decode(file_get_contents("php://input"), true);
 $code = $data['code_acces'] ?? null;
@@ -33,11 +33,12 @@ if (strtotime($client['date_expiration']) < time()) {
   exit;
 }
 
-echo json_encode([
+ http_response_code(200);
+ echo json_encode([
   "success" => true,
   "nom" => $client['nom'],
   "prenom" => $client['prenom'],
   "numero" => $client['numero'],
-  "" => $client['numero'],
+  "etat" => $client['etat'],
   "date_expiration" => $client['date_expiration']
 ]);

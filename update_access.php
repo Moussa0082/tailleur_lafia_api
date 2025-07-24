@@ -1,5 +1,5 @@
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=monapp;charset=utf8", "root", "");
+require_once 'db.php'; // <-- inclut la connexion
 
 $data = json_decode(file_get_contents("php://input"), true);
 $code = $data['code_acces'] ?? null;
