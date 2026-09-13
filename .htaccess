@@ -1,0 +1,10 @@
+# Dans le fichier .htaccess
+RewriteEngine On
+
+# Autoriser l'accès direct aux fichiers API
+RewriteCond %{HTTP_USER_AGENT} !.*Flutter.* [NC]
+RewriteRule ^(login\.php|api/.*)$ - [L]
+
+# Désactiver la protection pour certaines IP (si possible)
+SetEnvIf User-Agent ".*Flutter.*" allow_direct
+

@@ -2,7 +2,11 @@
 <?php
 require_once 'db.php';
 
+// header('Content-Type: application/json');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,7 +20,7 @@ if (!$montant || !$date_paiement || !$client_id) {
   exit;
 }
 
-$stmt = $pdo->prepare("INSERT INTO paiements (montant, date_paiement, client_id) VALUES (?, ?, ?)");
+$stmt = $pdo->prepare("INSERT INTO paiements (montant, date_paiement, client_id) VALUES (?, NOW(), ?)");
 
 try {
   $stmt->execute([$montant, $date_paiement, $client_id]);

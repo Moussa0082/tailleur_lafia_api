@@ -1,7 +1,11 @@
 <?php
 require_once 'db.php'; // <-- inclut la connexion
 
+// header('Content-Type: application/json');
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -19,8 +23,8 @@ if (!$nom || !$prenom || !$numero || !$code || !$date_expiration) {
 }
 
 $stmt = $pdo->prepare("
-  INSERT INTO clients (nom, prenom, numero, adresse, code_acces, date_expiration)
-  VALUES (?, ?, ?, ?, ?, ?)
+  INSERT INTO clients (nom, prenom, numero, adresse,  code_acces, dateAjout, date_expiration)
+  VALUES (?, ?, ?, ?, ?, NOW(), ?)
 ");
 $stmt->execute([$nom, $prenom, $numero, $adresse, $code, $date_expiration]);
 

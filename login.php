@@ -1,6 +1,10 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+// header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
 
 require_once 'db.php'; // fichier de connexion PDO
 
@@ -43,13 +47,15 @@ try {
         "success" => true,
         "message" => "Connexion réussie.",
         "data" => [
-    "id" => $client["id"],
+     "id" => $client["id"],
     "nom" => $client["nom"],
     "prenom" => $client["prenom"],
     "numero" => $client["numero"],
     "adresse" => $client["adresse"],
+    "nomAtelier" => $client["nomAtelier"],
     "etat" => $client["etat"],
-    "date_expiration" => $client["date_expiration"]
+    "date_expiration" => $client["date_expiration"],
+    "isAdmin" => $client["isAdmin"]
 ]
 
     ]);
